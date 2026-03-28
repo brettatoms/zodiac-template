@@ -1,0 +1,9 @@
+{:paths []
+ :deps {poly/app-base {:local/root "../../bases/app"}
+        poly/database {:local/root "../../components/database"}}
+ :aliases {:run {:main-opts ["-m" "{{top/ns}}.app.core"]}
+
+           :test {:extra-paths ["../../bases/app/test"
+                                "../../components/database/test"]
+                  :extra-deps {lambdaisland/kaocha {:mvn/version "1.91.1392"}}}
+           :test-runner {:main-opts ["-m" "kaocha.runner"]}}}

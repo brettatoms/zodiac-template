@@ -1,0 +1,17 @@
+{:description "A Zodiac web application."
+ :data-fn zodiac.app/data-fn
+ :template-fn zodiac.app/template-fn
+
+ ;; Default zodiac library versions — override on the command line if needed
+ :zodiac-version "RELEASE"
+ :zodiac-assets-version "RELEASE"
+ :zodiac-headers-version "RELEASE"
+ :zodiac-hot-reload-version "RELEASE"
+ :zodiac-sql-version "RELEASE"
+
+ ;; Default options
+ :db :sqlite
+ :structure :flat
+
+ ;; The :transform is set dynamically by template-fn based on :structure
+ :transform []}

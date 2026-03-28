@@ -1,0 +1,31 @@
+{:{{top/ns}}.{{main/ns}}/zodiac-sql
+ {:spec {:jdbcUrl {{jdbc-url}}}
+  :context-key :db}
+
+ :{{top/ns}}.{{main/ns}}/zodiac-assets
+ {:manifest-path "{{main}}/build/.vite/manifest.json"
+  :asset-resource-path "{{main}}/build/assets"
+  :context-key :assets
+  :vite #profile {:local {:mode :dev-server
+                          :config-file "vite.config.dev.js"}
+                  :default {:mode :build}}}
+
+ :{{top/ns}}.{{main/ns}}/zodiac-headers {}
+
+ :{{top/ns}}.{{main/ns}}/zodiac-hot-reload
+ #profile {:local {:watch-paths ["src"]
+                   :watch-extensions #{".clj" ".cljc" ".edn"}}
+           :default nil}
+
+ :{{top/ns}}.{{main/ns}}/zodiac
+ {:extensions [#ig/ref :{{top/ns}}.{{main/ns}}/zodiac-sql
+               #ig/ref :{{top/ns}}.{{main/ns}}/zodiac-assets
+               #ig/ref :{{top/ns}}.{{main/ns}}/zodiac-headers
+               #ig/ref :{{top/ns}}.{{main/ns}}/zodiac-hot-reload]
+  :reload-per-request? #profile {:local true
+                                 :default false}
+  :jetty {:host "0.0.0.0"
+          :port 3000}}
+
+ :{{top/ns}}.{{main/ns}}/migrate
+ {:zodiac #ig/ref :{{top/ns}}.{{main/ns}}/zodiac}}

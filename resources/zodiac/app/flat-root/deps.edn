@@ -1,0 +1,25 @@
+{:paths ["src" "resources"]
+ :deps {org.clojure/clojure {:mvn/version "1.12.0"}
+
+        com.github.brettatoms/zodiac {:mvn/version "{{zodiac-version}}"}
+        com.github.brettatoms/zodiac-assets {:mvn/version "{{zodiac-assets-version}}"}
+        com.github.brettatoms/zodiac-headers {:mvn/version "{{zodiac-headers-version}}"}
+        com.github.brettatoms/zodiac-hot-reload {:mvn/version "{{zodiac-hot-reload-version}}"}
+        com.github.brettatoms/zodiac-sql {:mvn/version "{{zodiac-sql-version}}"}
+
+        {{jdbc-driver-dep}}
+
+        aero/aero {:mvn/version "1.1.6"}
+        integrant/integrant {:mvn/version "1.0.1"}
+        org.clojure/tools.logging {:mvn/version "1.3.0"}
+        com.taoensso/telemere {:mvn/version "1.2.0"}
+        com.taoensso/telemere-slf4j {:mvn/version "1.2.0"}}
+
+ :aliases {:dev {:extra-paths ["dev"]
+                 :extra-deps {org.clojure/tools.namespace {:mvn/version "1.5.0"}}
+                 :jvm-opts ["-XX:-OmitStackTraceInFastThrow"]}
+
+           :test {:extra-paths ["test"]
+                  :extra-deps {lambdaisland/kaocha {:mvn/version "1.91.1392"}}}
+
+           :test-runner {:main-opts ["-m" "kaocha.runner"]}}}

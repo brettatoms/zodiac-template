@@ -1,0 +1,4 @@
+{:paths ["src" "resources"]
+ :deps {com.github.brettatoms/zodiac-sql {:mvn/version "{{zodiac-sql-version}}"}}
+ :aliases {:test {:extra-paths ["test"]
+                  :extra-deps {}}}}

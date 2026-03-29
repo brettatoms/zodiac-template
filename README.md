@@ -1,4 +1,4 @@
-# zodiac/app template
+# Zodiac template
 
 A [deps-new](https://github.com/seancorfield/deps-new) template for creating
 [Zodiac](https://github.com/brettatoms/zodiac) web applications.
@@ -14,6 +14,9 @@ The generated project includes:
 
 ## Usage
 
+Requires [Clojure 1.12+](https://clojure.org/releases/tools) and
+[deps-new](https://github.com/seancorfield/deps-new) v0.7.0+.
+
 Install deps-new as a tool:
 
 ```bash
@@ -23,29 +26,31 @@ clojure -Ttools install-latest :lib io.github.seancorfield/deps-new :as new
 ### Basic (flat structure + SQLite)
 
 ```bash
-clojure -Sdeps '{:deps {io.github.brettatoms/zodiac-template {:git/tag "v0.1.0" :git/sha "FIXME"}}}' \
-  -Tnew create :template zodiac/app :name myorg/myapp
+clojure -Tnew create :template io.github.brettatoms/zodiac-template%zodiac/app :name myorg/myapp
 ```
 
 ### With PostgreSQL
 
 ```bash
-clojure -Sdeps '{:deps {io.github.brettatoms/zodiac-template {:git/tag "v0.1.0" :git/sha "FIXME"}}}' \
-  -Tnew create :template zodiac/app :name myorg/myapp :db :postgres
+clojure -Tnew create :template io.github.brettatoms/zodiac-template%zodiac/app :name myorg/myapp :db :postgres
 ```
 
 ### Polylith structure
 
 ```bash
-clojure -Sdeps '{:deps {io.github.brettatoms/zodiac-template {:git/tag "v0.1.0" :git/sha "FIXME"}}}' \
-  -Tnew create :template zodiac/app :name myorg/myapp :structure :polylith
+clojure -Tnew create :template io.github.brettatoms/zodiac-template%zodiac/app :name myorg/myapp :structure :polylith
 ```
 
 ### Polylith + PostgreSQL
 
 ```bash
-clojure -Sdeps '{:deps {io.github.brettatoms/zodiac-template {:git/tag "v0.1.0" :git/sha "FIXME"}}}' \
-  -Tnew create :template zodiac/app :name myorg/myapp :structure :polylith :db :postgres
+clojure -Tnew create :template io.github.brettatoms/zodiac-template%zodiac/app :name myorg/myapp :structure :polylith :db :postgres
+```
+
+To pin a specific version, append `#tag`:
+
+```bash
+clojure -Tnew create :template io.github.brettatoms/zodiac-template%zodiac/app#v0.1.0 :name myorg/myapp
 ```
 
 ## Options

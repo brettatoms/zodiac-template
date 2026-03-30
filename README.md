@@ -59,11 +59,11 @@ clojure -Tnew create :template io.github.brettatoms/zodiac-template%zodiac/app#v
 |---|---|---|---|
 | `:db` | `:sqlite`, `:postgres` | `:sqlite` | Database driver and SQL dialect |
 | `:structure` | `:flat`, `:polylith` | `:flat` | Project layout style |
-| `:zodiac-version` | version string | `"RELEASE"` | Zodiac core version |
-| `:zodiac-assets-version` | version string | `"RELEASE"` | zodiac-assets version |
-| `:zodiac-sql-version` | version string | `"RELEASE"` | zodiac-sql version |
-| `:zodiac-headers-version` | version string | `"RELEASE"` | zodiac-headers version |
-| `:zodiac-hot-reload-version` | version string | `"RELEASE"` | zodiac-hot-reload version |
+| `:zodiac-version` | version string | `"0.9.98"` | Zodiac core version |
+| `:zodiac-assets-version` | version string | `"0.6.48"` | zodiac-assets version |
+| `:zodiac-sql-version` | version string | `"0.2.22"` | zodiac-sql version |
+| `:zodiac-headers-version` | version string | `"0.1.2"` | zodiac-headers version |
+| `:zodiac-hot-reload-version` | version string | `"0.1.2"` | zodiac-hot-reload version |
 
 ## Development
 

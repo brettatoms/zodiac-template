@@ -3,11 +3,11 @@
  :template-fn zodiac.app/template-fn
 
  ;; Default zodiac library versions — override on the command line if needed
- :zodiac-version "RELEASE"
- :zodiac-assets-version "RELEASE"
- :zodiac-headers-version "RELEASE"
- :zodiac-hot-reload-version "RELEASE"
- :zodiac-sql-version "RELEASE"
+ :zodiac-version "0.9.98"
+ :zodiac-assets-version "0.6.48"
+ :zodiac-headers-version "0.1.2"
+ :zodiac-hot-reload-version "0.1.2"
+ :zodiac-sql-version "0.2.22"
 
  ;; Default options
  :db :sqlite

@@ -1,5 +1,6 @@
 (ns zodiac.app
   (:require [clojure.java.io :as io]
+            [clojure.string :as str]
             [zodiac.app.rules :as rules]))
 
 (defn data-fn
@@ -14,6 +15,7 @@
                                :postgres "zodiac/app/test-shared/fixture_postgres.clj")))]
     (merge
      {:db (name db)
+      :display-name (str/capitalize (:top data))
       :test-body test-body
       :test-fixture test-fixture
       :test-jdbc-url-def ""}

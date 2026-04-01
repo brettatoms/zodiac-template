@@ -3,8 +3,8 @@
             [integrant.core :as ig]
             [zodiac.core :as z]
             [zodiac.ext.sql :as z.sql]
-            [{{top/ns}}.{{main/ns}}.routes :as routes]
-            [{{top/ns}}.{{main/ns}}.routes.todos :as todo]))
+            [{{top/ns}}.routes :as routes]
+            [{{top/ns}}.routes.todos :as todo]))
 
 ;; --- Test System ---
 

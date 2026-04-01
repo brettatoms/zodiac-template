@@ -1,11 +1,9 @@
 {:{{top/ns}}.app.server/zodiac-sql
- {:spec {:jdbcUrl {{jdbc-url}}}
-  :context-key :db}
+ {:spec {:jdbcUrl {{jdbc-url}}}}
 
  :{{top/ns}}.app.server/zodiac-assets
  {:manifest-path "app/build/.vite/manifest.json"
   :asset-resource-path "app/build/assets"
-  :context-key :assets
   :vite #profile {:local {:mode :dev-server
                           :config-file "vite.config.dev.js"
                           :package-json-dir "bases/app"}

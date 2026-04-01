@@ -1,7 +1,8 @@
-(ns {{top/ns}}.{{main/ns}}.routes.todos
+(ns {{top/ns}}.routes.todos
   (:require [ring.middleware.anti-forgery :refer [*anti-forgery-token*]]
             [charred.api :as json]
             [zodiac.core :as z]
+            [zodiac.ext.assets :as z.assets]
             [zodiac.ext.sql :as z.sql]))
 
 ;; --- Database ---
@@ -25,17 +26,17 @@
     [:meta {:charset "utf-8"}]
     [:meta {:name "viewport"
             :content "width=device-width, initial-scale=1"}]
-    [:title "{{raw-name}}"]
+    [:title "{{display-name}}"]
     [:style "[x-cloak] {display: none !important;}"]
     [:link {:rel "stylesheet"
-            :href (assets "{{main/file}}.css")}]]
+            :href (assets "main.css")}]]
    [:body {:hx-ext "alpine-morph"
            :hx-swap "morph"
            :x-data ""
            :x-cloak true}
     [:div {:class "max-w-2xl mx-auto mt-20 px-4"}
      body]
-    [:script {:src (assets "{{main/file}}.ts")
+    [:script {:src (assets "main.ts")
               :defer true}]]])
 
 (defn todo-form []
@@ -74,20 +75,20 @@
 ;; --- Handlers ---
 
 (defn index-handler [{:keys [::z/context]}]
-  (let [{:keys [assets db]} context]
+  (let [{:keys [::z.sql/db ::z.assets/assets]} context]
     (layout {:assets assets}
-            [:h1 {:class "text-2xl font-bold mb-6"} "{{raw-name}}"]
+            [:h1 {:class "text-2xl font-bold mb-6"} "{{display-name}}"]
             (todo-form)
             (todo-list db))))
 
 (defn create-handler [{:keys [::z/context form-params]}]
-  (let [{:keys [db]} context
+  (let [{:keys [::z.sql/db]} context
         title (get form-params "title")]
     (create-todo! db title)
     (todo-list db)))
 
 (defn delete-handler [{:keys [::z/context form-params]}]
-  (let [{:keys [db]} context
+  (let [{:keys [::z.sql/db]} context
         id (-> form-params (get "id") parse-long)]
     (delete-todo! db id)
     (todo-list db)))

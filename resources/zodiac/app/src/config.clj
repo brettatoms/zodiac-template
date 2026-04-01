@@ -1,4 +1,4 @@
-(ns {{top/ns}}.{{main/ns}}.config
+(ns {{top/ns}}.config
   (:require [aero.core :as aero]
             [clojure.java.io :as io]
             [integrant.core :as ig]))

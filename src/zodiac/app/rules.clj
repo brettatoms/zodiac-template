@@ -7,11 +7,11 @@
    ["flat-root" ""]
    ["src" "src/{{top/file}}"
     {"main.clj" "{{main/file}}.clj"
-     "main.css" "{{main/file}}.css"
-     "main.ts" "{{main/file}}.ts"
-     "routes.clj" "{{main/file}}/routes.clj"
-     "config.clj" "{{main/file}}/config.clj"}]
-   ["src-routes" "src/{{top/file}}/{{main/file}}/routes"
+     "main.css" "main.css"
+     "main.ts" "main.ts"
+     "routes.clj" "routes.clj"
+     "config.clj" "config.clj"}]
+   ["src-routes" "src/{{top/file}}/routes"
     {"todos.clj" "todos.clj"}]
    ["dev" "dev"]
    ["test" "test/{{top/file}}"
@@ -37,8 +37,8 @@
    ["poly-project" "projects/app"]
    ["poly-dev" "development/src"]
    ["src" "bases/app/src/{{top/file}}/app"
-    {"main.css" "{{main/file}}.css"
-     "main.ts" "{{main/file}}.ts"}
+    {"main.css" "main.css"
+     "main.ts" "main.ts"}
     :only]
    ["poly-test" "bases/app/test/{{top/file}}/app"
     {"server_test.clj" "server_test.clj"}]])

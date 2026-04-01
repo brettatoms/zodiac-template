@@ -2,10 +2,10 @@ import { defineConfig } from "vite"
 import tailwindcss from "@tailwindcss/vite"
 
 export default defineConfig({
-  root: "src/{{top/file}}/{{main/file}}",
+  root: "src/{{top/file}}",
   resolve: {
     alias: {
-      "~": __dirname.concat("/src/{{top/file}}/{{main/file}}"),
+      "~": __dirname.concat("/src/{{top/file}}"),
     },
   },
   plugins: [
@@ -16,8 +16,8 @@ export default defineConfig({
     manifest: true,
     rollupOptions: {
       input: [
-        "{{main/file}}.ts",
-        "{{main/file}}.css",
+        "main.ts",
+        "main.css",
       ],
     },
   },

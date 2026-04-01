@@ -1,5 +1,5 @@
-(ns {{top/ns}}.{{main/ns}}.routes
-  (:require [{{top/ns}}.{{main/ns}}.routes.todos :as todos]))
+(ns {{top/ns}}.routes
+  (:require [{{top/ns}}.routes.todos :as todos]))
 
 (defn routes []
   ["" {}

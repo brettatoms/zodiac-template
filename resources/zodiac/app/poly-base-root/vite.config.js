@@ -16,8 +16,8 @@ export default defineConfig({
     manifest: true,
     rollupOptions: {
       input: [
-        "{{main/file}}.ts",
-        "{{main/file}}.css",
+        "main.ts",
+        "main.css",
       ],
     },
   },

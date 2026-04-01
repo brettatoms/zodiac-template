@@ -2,27 +2,29 @@
   (:require [ring.middleware.anti-forgery :refer [*anti-forgery-token*]]
             [charred.api :as json]
             [zodiac.core :as z]
+            [zodiac.ext.assets :as z.assets]
+            [zodiac.ext.sql :as z.sql]
             [{{top/ns}}.database.interface :as db]))
 
 ;; --- Views ---
 
-(defn layout [{:keys [assets]} & body]
+(defn layout [{:keys [::z.assets/assets]} & body]
   [:html
    [:head
     [:meta {:charset "utf-8"}]
     [:meta {:name "viewport"
             :content "width=device-width, initial-scale=1"}]
-    [:title "{{raw-name}}"]
+    [:title "{{display-name}}"]
     [:style "[x-cloak] {display: none !important;}"]
     [:link {:rel "stylesheet"
-            :href (assets "{{main/file}}.css")}]]
+            :href (assets "main.css")}]]
    [:body {:hx-ext "alpine-morph"
            :hx-swap "morph"
            :x-data ""
            :x-cloak true}
     [:div {:class "max-w-2xl mx-auto mt-20 px-4"}
      body]
-    [:script {:src (assets "{{main/file}}.ts")
+    [:script {:src (assets "main.ts")
               :defer true}]]])
 
 (defn todo-form []
@@ -43,7 +45,7 @@
     "Add"]])
 
 (defn todo-list [ctx]
-  (let [{:keys [db]} ctx]
+  (let [{:keys [::z.sql/db]} ctx]
     [:ul {:id "todo-list"
           :class "divide-y divide-gray-200"}
      (for [item (db/list-todos db)]
@@ -62,20 +64,20 @@
 ;; --- Handlers ---
 
 (defn index-handler [{:keys [::z/context]}]
-  (let [{:keys [assets]} context]
+  (let [{:keys [::z.assets/assets]} context]
     (layout {:assets assets}
-            [:h1 {:class "text-2xl font-bold mb-6"} "{{raw-name}}"]
+            [:h1 {:class "text-2xl font-bold mb-6"} "{{display-name}}"]
             (todo-form)
             (todo-list context))))
 
 (defn create-handler [{:keys [::z/context form-params]}]
-  (let [{:keys [db]} context
+  (let [{:keys [::z.sql/db]} context
         title (get form-params "title")]
     (db/create-todo! db title)
     (todo-list context)))
 
 (defn delete-handler [{:keys [::z/context form-params]}]
-  (let [{:keys [db]} context
+  (let [{:keys [::z.sql/db]} context
         id (-> form-params (get "id") parse-long)]
     (db/delete-todo! db id)
     (todo-list context)))

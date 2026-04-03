@@ -1,13 +1,13 @@
 (ns user
   (:require [integrant.core :as ig]
-            [{{top/ns}}.{{main/ns}} :as {{main/ns}}]))
+            [{{top/ns}}.{{main/ns}}.core :as core]))
 
 (defonce ^:dynamic *system* nil)
 
 (defn go
   ([] (go :local))
   ([profile]
-   (let [sys ({{main/ns}}/start profile)]
+   (let [sys (core/start profile)]
      (alter-var-root #'*system* (constantly sys))
      :started)))
 

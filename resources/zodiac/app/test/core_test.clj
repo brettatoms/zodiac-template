@@ -1,11 +1,10 @@
-(ns {{top/ns}}.{{main/ns}}.server-test
+(ns {{top/ns}}.{{main/ns}}.core-test
   (:require [clojure.test :refer [deftest is testing use-fixtures]]
             [integrant.core :as ig]
             [zodiac.core :as z]
             [zodiac.ext.sql :as z.sql]
-            [{{top/ns}}.{{main/ns}}.server :as server]
             [{{top/ns}}.{{main/ns}}.routes :as routes]
-            [{{top/ns}}.database.interface :as todo]))
+            [{{top/ns}}.{{main/ns}}.routes.todos :as todo]))
 
 ;; --- Test System ---
 
@@ -14,21 +13,21 @@
 {{test-jdbc-url-def}}
 
 (defn test-system-config [jdbc-url]
-  {:{{top/ns}}.{{main/ns}}.server/zodiac-sql
+  {:{{top/ns}}.{{main/ns}}.core/zodiac-sql
    {:spec {:jdbcUrl jdbc-url}
     :context-key :db}
 
-   :{{top/ns}}.{{main/ns}}.server/zodiac
-   {:extensions [(ig/ref :{{top/ns}}.{{main/ns}}.server/zodiac-sql)]
+   :{{top/ns}}.{{main/ns}}.core/zodiac
+   {:extensions [(ig/ref :{{top/ns}}.{{main/ns}}.core/zodiac-sql)]
     :routes #'routes/routes
     :start-server? false}
 
-   :{{top/ns}}.{{main/ns}}.server/migrate
-   {:zodiac (ig/ref :{{top/ns}}.{{main/ns}}.server/zodiac)}})
+   :{{top/ns}}.{{main/ns}}.core/migrate
+   {:zodiac (ig/ref :{{top/ns}}.{{main/ns}}.core/zodiac)}})
 
 (defn system-refs [system]
-  [(-> system :{{top/ns}}.{{main/ns}}.server/zodiac ::z.sql/db)
-   (-> system :{{top/ns}}.{{main/ns}}.server/zodiac ::z/app)])
+  [(-> system :{{top/ns}}.{{main/ns}}.core/zodiac ::z.sql/db)
+   (-> system :{{top/ns}}.{{main/ns}}.core/zodiac ::z/app)])
 
 {{test-fixture}}
 

@@ -1,4 +1,4 @@
-(ns {{top/ns}}.{{main/ns}}
+(ns {{top/ns}}.{{main/ns}}.core
   (:gen-class)
   (:require [clojure.tools.logging :as log]
             [integrant.core :as ig]
@@ -7,8 +7,8 @@
             [zodiac.ext.headers :as z.headers]
             [zodiac.ext.hot-reload :as z.hot-reload]
             [zodiac.ext.sql :as z.sql]
-            [{{top/ns}}.config :as config]
-            [{{top/ns}}.routes :as routes]))
+            [{{top/ns}}.{{main/ns}}.config :as config]
+            [{{top/ns}}.{{main/ns}}.routes :as routes]))
 
 ;; --- System ---
 

@@ -1,4 +1,4 @@
-(ns {{top/ns}}.app.server
+(ns {{top/ns}}.{{main/ns}}.server
   (:require [clojure.tools.logging :as log]
             [integrant.core :as ig]
             [zodiac.core :as z]
@@ -6,7 +6,7 @@
             [zodiac.ext.headers :as z.headers]
             [zodiac.ext.hot-reload :as z.hot-reload]
             [zodiac.ext.sql :as z.sql]
-            [{{top/ns}}.app.routes :as routes]))
+            [{{top/ns}}.{{main/ns}}.routes :as routes]))
 
 ;; --- System ---
 

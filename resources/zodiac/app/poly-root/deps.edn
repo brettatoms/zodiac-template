@@ -1,14 +1,14 @@
 {:paths []
  :deps {org.clojure/clojure {:mvn/version "1.12.0"}}
  :aliases {:dev {:extra-paths ["development/src"]
-                 :extra-deps {poly/app-base {:local/root "bases/app"}
+                 :extra-deps {poly/{{main}}-base {:local/root "bases/{{main}}"}
                               poly/database {:local/root "components/database"}
 
                               integrant/integrant {:mvn/version "1.0.1"}
                               org.clojure/tools.namespace {:mvn/version "1.5.0"}}
                  :jvm-opts ["-XX:-OmitStackTraceInFastThrow"]}
 
-           :test {:extra-paths ["bases/app/test"
+           :test {:extra-paths ["bases/{{main}}/test"
                                 "components/database/test"]
                   :extra-deps {lambdaisland/kaocha {:mvn/version "1.91.1392"}}}
 

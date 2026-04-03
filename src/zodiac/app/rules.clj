@@ -5,40 +5,40 @@
   [_data]
   [["root" ""]
    ["flat-root" ""]
-   ["src" "src/{{top/file}}"
-    {"main.clj" "{{main/file}}.clj"
+   ["src" "src/{{top/file}}/{{main/file}}"
+    {"core.clj" "core.clj"
      "main.css" "main.css"
      "main.ts" "main.ts"
      "routes.clj" "routes.clj"
      "config.clj" "config.clj"}]
-   ["src-routes" "src/{{top/file}}/routes"
+   ["src-routes" "src/{{top/file}}/{{main/file}}/routes"
     {"todos.clj" "todos.clj"}]
    ["dev" "dev"]
-   ["test" "test/{{top/file}}"
-    {"main_test.clj" "{{main/file}}_test.clj"}]])
+   ["test" "test/{{top/file}}/{{main/file}}"
+    {"core_test.clj" "core_test.clj"}]])
 
 (defn polylith
   "Transform rules for polylith project structure."
   [_data]
   [["root" ""]
    ["poly-root" ""]
-   ["poly-base-src" "bases/app/src/{{top/file}}/app"
+   ["poly-base-src" "bases/{{main}}/src/{{top/file}}/{{main/file}}"
     {"core.clj" "core.clj"
      "server.clj" "server.clj"
      "routes.clj" "routes.clj"
      "config.clj" "config.clj"}]
-   ["poly-base-resources" "bases/app/resources/app"]
-   ["poly-base-root" "bases/app"]
+   ["poly-base-resources" "bases/{{main}}/resources/{{main}}"]
+   ["poly-base-root" "bases/{{main}}"]
    ["poly-component-db-src" "components/database/src/{{top/file}}/database"
     {"interface.clj" "interface.clj"}]
-   ["poly-routes" "bases/app/src/{{top/file}}/app/routes"
+   ["poly-routes" "bases/{{main}}/src/{{top/file}}/{{main/file}}/routes"
     {"todos.clj" "todos.clj"}]
    ["poly-component-db-root" "components/database"]
-   ["poly-project" "projects/app"]
+   ["poly-project" "projects/{{main}}"]
    ["poly-dev" "development/src"]
-   ["src" "bases/app/src/{{top/file}}/app"
+   ["src" "bases/{{main}}/src/{{top/file}}/{{main/file}}"
     {"main.css" "main.css"
      "main.ts" "main.ts"}
     :only]
-   ["poly-test" "bases/app/test/{{top/file}}/app"
+   ["poly-test" "bases/{{main}}/test/{{top/file}}/{{main/file}}"
     {"server_test.clj" "server_test.clj"}]])

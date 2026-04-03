@@ -1,0 +1,18 @@
+{
+  "calva.replConnectSequences": [
+    {
+      "name": "dev",
+      "projectType": "deps.edn",
+      "cljsType": "none",
+      "menuSelections": {
+        "cljAliases": ["dev", "test"]
+      },
+      "jackInEnv": {
+        "JAVA_OPTS": "-XX:-OmitStackTraceInFastThrow"
+      },
+      "extraNReplMiddleware": [
+        "ring.hot-reload.nrepl/wrap-hot-reload-nrepl"
+      ]
+    }
+  ]
+}

@@ -21,14 +21,14 @@
       :test-jdbc-url-def ""}
      (case db
        :sqlite
-       {:jdbc-driver-dep "org.xerial/sqlite-jdbc {:mvn/version \"3.49.1.0\"}"
+       {:jdbc-driver-dep "org.xerial/sqlite-jdbc {:mvn/version \"3.51.3.0\"}"
         :jdbc-url (format "\"jdbc:sqlite:%s.db\"" main)
         :db-comment "SQLite database"
         :create-table-sql "create table if not exists todo (\n  id integer primary key autoincrement,\n  title text not null,\n  created_at text not null default (datetime('now'))\n)"
         :insert-returning ""}
 
        :postgres
-       {:jdbc-driver-dep "org.postgresql/postgresql {:mvn/version \"42.7.5\"}"
+       {:jdbc-driver-dep "org.postgresql/postgresql {:mvn/version \"42.7.10\"}"
         :jdbc-url (format "\"jdbc:postgresql://localhost:5432/%s\"" main)
         :db-comment "PostgreSQL database"
         :create-table-sql "create table if not exists todo (\n  id serial primary key,\n  title text not null,\n  created_at timestamptz not null default now()\n)"

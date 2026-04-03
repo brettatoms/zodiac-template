@@ -2,6 +2,8 @@
   (:require [integrant.core :as ig]
             [{{ns-prefix}}.core :as core]))
 
+(add-tap println)
+
 (defonce ^:dynamic *system* nil)
 
 (defn go

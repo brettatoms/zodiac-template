@@ -25,7 +25,7 @@
     [:div {:class "max-w-2xl mx-auto mt-20 px-4"}
      body]
     [:script {:src (assets "main.ts")
-              :defer true}]]])
+              :type "module"}]]])
 
 (defn todo-form []
   [:form {:hx-post (z/url-for :todos)

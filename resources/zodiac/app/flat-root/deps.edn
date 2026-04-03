@@ -1,5 +1,5 @@
 {:paths ["src" "resources"]
- :deps {org.clojure/clojure {:mvn/version "1.12.0"}
+ :deps {org.clojure/clojure {:mvn/version "1.12.4"}
 
         com.github.brettatoms/zodiac {:mvn/version "{{zodiac-version}}"}
         com.github.brettatoms/zodiac-assets {:mvn/version "{{zodiac-assets-version}}"}

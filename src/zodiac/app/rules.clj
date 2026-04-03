@@ -5,16 +5,16 @@
   [_data]
   [["root" ""]
    ["flat-root" ""]
-   ["src" "src/{{top/file}}/{{main/file}}"
+   ["src" "src/{{ns-prefix-path}}"
     {"core.clj" "core.clj"
      "main.css" "main.css"
      "main.ts" "main.ts"
      "routes.clj" "routes.clj"
      "config.clj" "config.clj"}]
-   ["src-routes" "src/{{top/file}}/{{main/file}}/routes"
+   ["src-routes" "src/{{ns-prefix-path}}/routes"
     {"todos.clj" "todos.clj"}]
    ["dev" "dev"]
-   ["test" "test/{{top/file}}/{{main/file}}"
+   ["test" "test/{{ns-prefix-path}}"
     {"core_test.clj" "core_test.clj"}]])
 
 (defn polylith
@@ -22,23 +22,23 @@
   [_data]
   [["root" ""]
    ["poly-root" ""]
-   ["poly-base-src" "bases/{{main}}/src/{{top/file}}/{{main/file}}"
+   ["poly-base-src" "bases/{{app-name}}/src/{{ns-prefix-path}}"
     {"core.clj" "core.clj"
      "server.clj" "server.clj"
      "routes.clj" "routes.clj"
      "config.clj" "config.clj"}]
-   ["poly-base-resources" "bases/{{main}}/resources/{{main}}"]
-   ["poly-base-root" "bases/{{main}}"]
+   ["poly-base-resources" "bases/{{app-name}}/resources/{{app-name}}"]
+   ["poly-base-root" "bases/{{app-name}}"]
    ["poly-component-db-src" "components/database/src/{{top/file}}/database"
     {"interface.clj" "interface.clj"}]
-   ["poly-routes" "bases/{{main}}/src/{{top/file}}/{{main/file}}/routes"
+   ["poly-routes" "bases/{{app-name}}/src/{{ns-prefix-path}}/routes"
     {"todos.clj" "todos.clj"}]
    ["poly-component-db-root" "components/database"]
-   ["poly-project" "projects/{{main}}"]
+   ["poly-project" "projects/{{app-name}}"]
    ["poly-dev" "development/src"]
-   ["src" "bases/{{main}}/src/{{top/file}}/{{main/file}}"
+   ["src" "bases/{{app-name}}/src/{{ns-prefix-path}}"
     {"main.css" "main.css"
      "main.ts" "main.ts"}
     :only]
-   ["poly-test" "bases/{{main}}/test/{{top/file}}/{{main/file}}"
+   ["poly-test" "bases/{{app-name}}/test/{{ns-prefix-path}}"
     {"server_test.clj" "server_test.clj"}]])

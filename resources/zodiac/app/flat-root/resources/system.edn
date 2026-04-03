@@ -1,29 +1,29 @@
-{:{{top/ns}}.{{main/ns}}.core/zodiac-sql
+{:{{ns-prefix}}.core/zodiac-sql
  {:spec {:jdbcUrl {{jdbc-url}}}}
 
- :{{top/ns}}.{{main/ns}}.core/zodiac-assets
- {:manifest-path "{{main}}/build/.vite/manifest.json"
-  :asset-resource-path "{{main}}/build/assets"
+ :{{ns-prefix}}.core/zodiac-assets
+ {:manifest-path "{{app-name}}/build/.vite/manifest.json"
+  :asset-resource-path "{{app-name}}/build/assets"
   :vite #profile {:local {:mode :dev-server
                           :config-file "vite.config.dev.js"}
                   :default {:mode :build}}}
 
- :{{top/ns}}.{{main/ns}}.core/zodiac-headers {}
+ :{{ns-prefix}}.core/zodiac-headers {}
 
- :{{top/ns}}.{{main/ns}}.core/zodiac-hot-reload
+ :{{ns-prefix}}.core/zodiac-hot-reload
  #profile {:local {:watch-paths ["src"]
                    :watch-extensions #{".clj" ".cljc" ".edn"}}
            :default nil}
 
- :{{top/ns}}.{{main/ns}}.core/zodiac
- {:extensions [#ig/ref :{{top/ns}}.{{main/ns}}.core/zodiac-sql
-               #ig/ref :{{top/ns}}.{{main/ns}}.core/zodiac-assets
-               #ig/ref :{{top/ns}}.{{main/ns}}.core/zodiac-headers
-               #ig/ref :{{top/ns}}.{{main/ns}}.core/zodiac-hot-reload]
+ :{{ns-prefix}}.core/zodiac
+ {:extensions [#ig/ref :{{ns-prefix}}.core/zodiac-sql
+               #ig/ref :{{ns-prefix}}.core/zodiac-assets
+               #ig/ref :{{ns-prefix}}.core/zodiac-headers
+               #ig/ref :{{ns-prefix}}.core/zodiac-hot-reload]
   :reload-per-request? #profile {:local true
                                  :default false}
   :jetty {:host "0.0.0.0"
           :port 3000}}
 
- :{{top/ns}}.{{main/ns}}.core/migrate
- {:zodiac #ig/ref :{{top/ns}}.{{main/ns}}.core/zodiac}}
+ :{{ns-prefix}}.core/migrate
+ {:zodiac #ig/ref :{{ns-prefix}}.core/zodiac}}

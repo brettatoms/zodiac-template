@@ -1,6 +1,6 @@
 (ns user
   (:require [integrant.core :as ig]
-            [{{top/ns}}.{{main/ns}}.core :as core]))
+            [{{ns-prefix}}.core :as core]))
 
 (defonce ^:dynamic *system* nil)
 

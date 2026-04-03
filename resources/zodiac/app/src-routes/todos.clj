@@ -1,4 +1,4 @@
-(ns {{top/ns}}.{{main/ns}}.routes.todos
+(ns {{ns-prefix}}.routes.todos
   (:require [ring.middleware.anti-forgery :refer [*anti-forgery-token*]]
             [charred.api :as json]
             [zodiac.core :as z]

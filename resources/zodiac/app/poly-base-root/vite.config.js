@@ -2,22 +2,21 @@ import { defineConfig } from "vite"
 import tailwindcss from "@tailwindcss/vite"
 
 export default defineConfig({
-  root: "src/{{ns-prefix-path}}",
+  root: __dirname.concat("/src/{{ns-prefix-path}}"),
   resolve: {
     alias: {
       "~": __dirname.concat("/src/{{ns-prefix-path}}"),
     },
   },
-  plugins: [
-    tailwindcss(),
-  ],
+  plugins: [tailwindcss()],
   build: {
-    outDir: "resources/{{app-name}}/build",
     manifest: true,
+    outDir: __dirname.concat("/resources/{{app-name}}/build"),
+    emptyOutDir: true,
     rollupOptions: {
       input: [
-        "main.ts",
-        "main.css",
+        "~/main.ts",
+        "~/main.css",
       ],
     },
   },

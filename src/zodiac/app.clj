@@ -6,7 +6,7 @@
 (defn data-fn
   "Compute substitution data based on :db and :structure options."
   [data]
-  (let [db (or (:db data) :sqlite)
+  (let [db (keyword (or (:db data) "sqlite"))
         top (:top data)
         main (:main data)
         app-name main
@@ -51,7 +51,7 @@
 (defn template-fn
   "Select transform rules based on :structure option."
   [edn data]
-  (let [structure (or (:structure data) :flat)]
+  (let [structure (keyword (or (:structure data) "flat"))]
     (println (str "Creating zodiac app with :db "
                   (or (:db data) :sqlite)
                   " :structure " structure))

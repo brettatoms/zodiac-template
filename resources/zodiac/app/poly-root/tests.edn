@@ -1,4 +1,4 @@
 #kaocha/v1
 {:tests [{:id :unit
-          :test-paths ["bases/app/test"
+          :test-paths ["bases/{{app-name}}/test"
                        "components/database/test"]}]}

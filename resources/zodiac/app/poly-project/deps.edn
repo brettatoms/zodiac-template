@@ -1,5 +1,5 @@
 {:paths []
- :deps {poly/{{app-name}}-base {:local/root "../../bases/{{app-name}}"}}
+ :deps {poly/{{app-name}}-base {:local/root "../../bases/{{app-name}}"}
         poly/database {:local/root "../../components/database"}}
  :aliases {:run {:main-opts ["-m" "{{ns-prefix}}.core"]}
 

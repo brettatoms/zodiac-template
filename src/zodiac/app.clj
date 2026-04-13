@@ -45,7 +45,7 @@
         :jdbc-url (format "\"jdbc:postgresql://localhost:5432/%s\"" app-name)
         :db-comment "PostgreSQL database"
         :create-table-sql "create table if not exists todo (\n  id serial primary key,\n  title text not null,\n  created_at timestamptz not null default now()\n)"
-        :insert-returning " returning *"
+        :insert-returning "\n                          :returning [:*]"
         :test-jdbc-url-def (format "(def test-jdbc-url \"jdbc:postgresql://localhost:5432/%s_test\")" app-name)}))))
 
 (defn template-fn

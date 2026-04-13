@@ -3,6 +3,7 @@
             [integrant.core :as ig]
             [zodiac.core :as z]
             [zodiac.ext.sql :as z.sql]
+            #_:clj-kondo/ignore
             [{{ns-prefix}}.server :as server]
             [{{ns-prefix}}.routes :as routes]
             [{{top/ns}}.database.interface :as todo]))
@@ -12,7 +13,6 @@
 (def ^:dynamic *db* nil)
 (def ^:dynamic *app* nil)
 {{test-jdbc-url-def}}
-
 (defn test-system-config [jdbc-url]
   {:{{ns-prefix}}.server/zodiac-sql
    {:spec {:jdbcUrl jdbc-url}
@@ -31,7 +31,6 @@
    (-> system :{{ns-prefix}}.server/zodiac ::z/app)])
 
 {{test-fixture}}
-
 (use-fixtures :once system-fixture)
 
 {{test-body}}

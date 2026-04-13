@@ -7,8 +7,6 @@
   ([] (start :default))
   ([profile]
    (let [system-config (config/read-config "{{app-name}}/system.edn" {:profile profile})]
-
-
      (ig/load-namespaces system-config)
      (ig/init system-config))))
 

@@ -1,0 +1,217 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  lint-template:
+    name: Lint template
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: DeLaGuardo/setup-clojure@13.4
+        with:
+          cli: latest
+          clj-kondo: latest
+          cljfmt: latest
+
+      - name: Cache deps
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.m2/repository
+            ~/.gitlibs
+          key: template-deps-${{ hashFiles('deps.edn') }}
+          restore-keys: template-deps-
+
+      - name: clj-kondo
+        run: clj-kondo --lint src test
+
+      - name: cljfmt
+        run: cljfmt check src test
+
+  test-template:
+    name: Test template
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: DeLaGuardo/setup-clojure@13.4
+        with:
+          cli: latest
+
+      - name: Cache deps
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.m2/repository
+            ~/.gitlibs
+          key: template-deps-${{ hashFiles('deps.edn') }}
+          restore-keys: template-deps-
+
+      - name: Run template tests
+        run: clojure -M:test -m cognitect.test-runner
+
+  test-generated-sqlite:
+    name: "Generated: ${{ matrix.structure }} + sqlite"
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        structure: [flat, polylith]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: DeLaGuardo/setup-clojure@13.4
+        with:
+          cli: latest
+          clj-kondo: latest
+          cljfmt: latest
+
+      - name: Cache deps
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.m2/repository
+            ~/.gitlibs
+          key: generated-${{ matrix.structure }}-sqlite-${{ hashFiles('deps.edn') }}
+          restore-keys: generated-${{ matrix.structure }}-sqlite-
+
+      - name: Generate project
+        run: |
+          clojure -Sdeps '{:deps {zodiac-template {:local/root "."}}}' \
+            -Tnew create \
+            :template zodiac/app \
+            :name myorg/myapp \
+            :structure :${{ matrix.structure }} \
+            :db :sqlite
+
+      - name: clj-kondo
+        working-directory: myapp
+        run: |
+          if [ "${{ matrix.structure }}" = "polylith" ]; then
+            clj-kondo --lint bases components development/src
+          else
+            clj-kondo --lint src test dev
+          fi
+
+      - name: cljfmt
+        working-directory: myapp
+        run: |
+          if [ "${{ matrix.structure }}" = "polylith" ]; then
+            cljfmt check bases components development/src
+          else
+            cljfmt check src test dev
+          fi
+
+      - name: Resolve deps
+        working-directory: myapp
+        run: |
+          if [ "${{ matrix.structure }}" = "polylith" ]; then
+            clojure -A:dev -Spath > /dev/null
+          else
+            clojure -Spath > /dev/null
+          fi
+
+      - name: Run tests
+        working-directory: myapp
+        run: |
+          if [ "${{ matrix.structure }}" = "polylith" ]; then
+            clojure -M:dev:test -m kaocha.runner
+          else
+            clojure -M:test -m kaocha.runner
+          fi
+
+  test-generated-postgres:
+    name: "Generated: ${{ matrix.structure }} + postgres"
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        structure: [flat, polylith]
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: myapp_test
+          POSTGRES_HOST_AUTH_METHOD: trust
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: DeLaGuardo/setup-clojure@13.4
+        with:
+          cli: latest
+          clj-kondo: latest
+          cljfmt: latest
+
+      - name: Cache deps
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.m2/repository
+            ~/.gitlibs
+          key: generated-${{ matrix.structure }}-postgres-${{ hashFiles('deps.edn') }}
+          restore-keys: generated-${{ matrix.structure }}-postgres-
+
+      - name: Generate project
+        run: |
+          clojure -Sdeps '{:deps {zodiac-template {:local/root "."}}}' \
+            -Tnew create \
+            :template zodiac/app \
+            :name myorg/myapp \
+            :structure :${{ matrix.structure }} \
+            :db :postgres
+
+      - name: clj-kondo
+        working-directory: myapp
+        run: |
+          if [ "${{ matrix.structure }}" = "polylith" ]; then
+            clj-kondo --lint bases components development/src
+          else
+            clj-kondo --lint src test dev
+          fi
+
+      - name: cljfmt
+        working-directory: myapp
+        run: |
+          if [ "${{ matrix.structure }}" = "polylith" ]; then
+            cljfmt check bases components development/src
+          else
+            cljfmt check src test dev
+          fi
+
+      - name: Resolve deps
+        working-directory: myapp
+        run: |
+          if [ "${{ matrix.structure }}" = "polylith" ]; then
+            clojure -A:dev -Spath > /dev/null
+          else
+            clojure -Spath > /dev/null
+          fi
+
+      - name: Run tests
+        working-directory: myapp
+        env:
+          PGHOST: localhost
+          PGPORT: "5432"
+          PGUSER: postgres
+          PGPASSWORD: postgres
+        run: |
+          if [ "${{ matrix.structure }}" = "polylith" ]; then
+            clojure -M:dev:test -m kaocha.runner
+          else
+            clojure -M:test -m kaocha.runner
+          fi

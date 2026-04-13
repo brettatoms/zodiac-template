@@ -11,7 +11,6 @@
 (def ^:dynamic *db* nil)
 (def ^:dynamic *app* nil)
 {{test-jdbc-url-def}}
-
 (defn test-system-config [jdbc-url]
   {:{{ns-prefix}}.core/zodiac-sql
    {:spec {:jdbcUrl jdbc-url}
@@ -30,7 +29,6 @@
    (-> system :{{ns-prefix}}.core/zodiac ::z/app)])
 
 {{test-fixture}}
-
 (use-fixtures :once system-fixture)
 
 {{test-body}}

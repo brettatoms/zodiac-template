@@ -155,6 +155,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Setup postgres roles
+        run: |
+          psql -h localhost -U postgres -d myapp_test -c "CREATE ROLE runner WITH LOGIN SUPERUSER;"
+        env:
+          PGPASSWORD: postgres
+
       - uses: DeLaGuardo/setup-clojure@13.4
         with:
           cli: latest
@@ -212,11 +218,6 @@ jobs:
 
       - name: Run tests
         working-directory: myapp
-        env:
-          PGHOST: localhost
-          PGPORT: "5432"
-          PGUSER: postgres
-          PGPASSWORD: postgres
         run: |
           if [ "${{ matrix.structure }}" = "polylith" ]; then
             clojure -M:dev:test -m kaocha.runner
